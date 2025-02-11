@@ -87,3 +87,8 @@ This project depends on:
 To install the dependencies, run:
 
     mix deps.get
+
+Additional dev tooling:
+
+- [`mix test.watch`](https://github.com/lpil/mix-test.watch) to run the tests automatically.
+- [`mix dialyzer`](https://github.com/jeremyjh/dialyxir) to run static analysis.
