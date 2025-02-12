@@ -28,19 +28,16 @@ defmodule MyApp do
 
   # function find_potential_upsells(policies: List<Policy>): List<UpsellOpportunity>
   def find_potential_upsells(policies) do
-    person_ids = Enum.map(policies, fn policy -> policy[:person_id] end)
-
-    person_ids
+    policies
+    # get person ids
+    |> Enum.map(fn policy -> policy[:person_id] end)
+    # call the API
     |> get_owned_vehicles()
-    |> Enum.filter(fn owned_vehicle ->
-      Enum.any?(policies, fn p ->
-        p[:person_id] == owned_vehicle[:person_id] and
-          p[:vehicle_id] != owned_vehicle[:vehicle_id]
-      end)
-    end)
+    |> Enum.filter(fn owned_vehicle -> Enum.any?(policies, &upsell_opportunity?/2) end)
+  end
+
+  defp upsell_opportunity?(policy, owned_vehicle) do
+    policy[:person_id] == owned_vehicle[:person_id] and
+      policy[:vehicle_id] != owned_vehicle[:vehicle_id]
   end
 end
-
-# person_ids
-# |> get_owned_vehicles
-# |> find_potential_upsells
