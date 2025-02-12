@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Item One",
+            "details": {
+                "description": "An item",
+                "metadata": {
+                    "size": "large",
+                    "color": "red"
+                }
+            }
+        },
+        {},
+        {},
+        ...
+    ]
+}
