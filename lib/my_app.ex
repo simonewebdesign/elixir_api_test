@@ -33,7 +33,9 @@ defmodule MyApp do
     |> Enum.map(fn policy -> policy[:person_id] end)
     # call the API
     |> get_owned_vehicles()
-    |> Enum.filter(fn owned_vehicle -> Enum.any?(policies, &upsell_opportunity?/2) end)
+    |> Enum.filter(fn owned_vehicle ->
+      Enum.any?(policies, fn policy -> upsell_opportunity?(policy, owned_vehicle) end)
+    end)
   end
 
   defp upsell_opportunity?(policy, owned_vehicle) do
