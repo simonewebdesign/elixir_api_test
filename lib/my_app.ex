@@ -18,13 +18,25 @@ defmodule MyApp do
 
   # function get_owned_vehicles(person_ids: List<String>): List<OwnedVehicle>
   # “Real” third party source behind this function
-  def get_owned_vehicles(_person_ids) do
+  def get_owned_vehicles(["P1", "P2"]) do
     [
       %{person_id: "P1", vehicle_id: "V3"},
       %{person_id: "P1", vehicle_id: "V8"},
       %{person_id: "P2", vehicle_id: "V6"}
     ]
   end
+
+  def get_owned_vehicles(["P2", "P3"]) do
+    [
+      %{person_id: "P2", vehicle_id: "V6"},
+      %{person_id: "P3", vehicle_id: "V9"},
+      %{person_id: "P3", vehicle_id: "V5"},
+      %{person_id: "P3", vehicle_id: "V2"}
+    ]
+  end
+
+  # this would return the actual list
+  def get_owned_vehicles(_person_ids), do: []
 
   # function find_potential_upsells(policies: List<Policy>): List<UpsellOpportunity>
   def find_potential_upsells(policies) do
