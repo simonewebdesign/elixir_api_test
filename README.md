@@ -39,11 +39,7 @@ The solution is designed as a starting point or demo for building robust HTTP cl
   Separating the parsing logic from the HTTP client allows for better modularity and easier testing. The parser uses pattern matching and private helper functions to cleanly build the structs.
 
 - **`lib/my_app/api_client.ex`**
-  Implements two functions to fetch items:
-  - `fetch_items/1`: Uses HTTPoison.
-  - `fetch_items_httpc/1`: Uses Erlang's `:httpc`.
-
-  This module illustrates two approaches for making HTTP requests. Both functions handle non-200 HTTP responses and errors gracefully by returning consistent error tuples, making it easier for the caller to handle unexpected scenarios.
+  This module illustrates how to make an HTTP request.
 
 - **`test/my_app/api_client_test.exs`**
   A realistic test suite using ExUnit and Bypass to simulate external HTTP responses.
