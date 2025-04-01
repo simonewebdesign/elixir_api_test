@@ -137,4 +137,16 @@ defmodule MyApp.APIClientTest do
 
     assert {:error, %HTTPoison.Error{}} = result
   end
+
+  @tag :external_api
+  test "fetch_json_as_map/1 calls the JSONPlaceholder API" do
+    url = "https://jsonplaceholder.typicode.com/posts/1"
+    result = APIClient.fetch_json_as_map(url)
+
+    assert is_map(result)
+    assert result["id"] == 1
+    assert is_binary(result["title"])
+    assert is_binary(result["body"])
+    assert result["userId"] == 1
+  end
 end
