@@ -1,7 +1,7 @@
 defmodule MyApp.APIClient do
   alias MyApp.Parser
 
-  def fetch_items_httpoison(url) do
+  def fetch_items(url) do
     case HTTPoison.get(url, [], recv_timeout: 5000) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         Parser.parse_items(body)

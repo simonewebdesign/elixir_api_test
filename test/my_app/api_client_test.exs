@@ -36,14 +36,14 @@ defmodule MyApp.APIClientTest do
     ]
   })
 
-  test "fetch_items_httpoison returns a list of items", %{bypass: bypass} do
+  test "fetch_items returns a list of items", %{bypass: bypass} do
     # Configure Bypass to respond with a valid JSON.
     Bypass.expect(bypass, fn conn ->
       Plug.Conn.resp(conn, 200, @json_response)
     end)
 
     url = "http://localhost:#{bypass.port}/api/items"
-    result = APIClient.fetch_items_httpoison(url)
+    result = APIClient.fetch_items(url)
 
     # Verify that we received a list of 2 items.
     assert is_list(result)
@@ -96,14 +96,14 @@ defmodule MyApp.APIClientTest do
     assert first_item == expected
   end
 
-  test "fetch_items_httpoison handles non-200 response", %{bypass: bypass} do
+  test "fetch_items handles non-200 response", %{bypass: bypass} do
     # Simulate a 404 response.
     Bypass.expect(bypass, fn conn ->
       Plug.Conn.resp(conn, 404, "Not Found")
     end)
 
     url = "http://localhost:#{bypass.port}/api/items"
-    result = APIClient.fetch_items_httpoison(url)
+    result = APIClient.fetch_items(url)
     assert {:error, _} = result
   end
 
